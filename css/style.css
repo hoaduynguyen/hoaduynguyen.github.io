@@ -184,7 +184,9 @@ footer {
     
     .date {
         text-align: left;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+        flex: none;
+        font-size: 0.9em;
     }
     
     .content {
@@ -196,3 +198,119 @@ footer {
         display: none;
     }
 }
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Print / Export PDF Button */
+.print-btn {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #6c757d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.print-btn:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top, .print-btn {
+        width: 40px;
+        height: 40px;
+        right: 15px;
+    }
+    .scroll-to-top { bottom: 20px; }
+    .print-btn { bottom: 70px; }
+}
+
+/* Print Styles - Đảm bảo in ra selectable text, không bị cắt */
+@media print {
+    body {
+        background: white !important;
+        color: #000 !important;
+        font-size: 11pt;
+        line-height: 1.4;
+    }
+
+    .hero {
+        background: #2c3e50 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 30px 0 !important;
+    }
+
+    .section {
+        box-shadow: none !important;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .timeline-item {
+        page-break-inside: avoid;
+    }
+
+    .tag {
+        border: 1px solid #ccc !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .scroll-to-top,
+    .print-btn {
+        display: none !important;
+    }
+
+    footer {
+        page-break-before: avoid;
+    }
+}
+
